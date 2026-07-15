@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌤️ SkyCast Weather App</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      color: #fff;
+      text-align: center;
+      padding: 40px;
+    }
+    h1 { font-size: 48px; margin-bottom: 20px; text-shadow: 2px 2px 6px #000; }
+    .weather-box {
+      background: rgba(255,255,255,0.1);
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 400px;
+      margin: 30px auto;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    }
+    input {
+      padding: 12px; border: none; border-radius: 8px;
+      width: 80%; font-size: 16px; margin-bottom: 15px;
+    }
+    button {
+      padding: 12px 20px; border: none; border-radius: 8px;
+      background: #ffcc00; color: #333; font-size: 16px;
+      cursor: pointer; transition: transform 0.2s ease;
+    }
+    button:hover { transform: scale(1.1); background: #ffaa00; }
+    .result { margin-top: 20px; font-size: 20px; white-space: pre-line; }
+    .emoji { font-size: 48px; margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+  <h1>🌤️ SkyCast Weather App</h1>
+  <p>Check the weather anywhere in the world 🌍</p>
+
+  <div class="weather-box">
+    <input type="text" id="cityInput" placeholder="Enter city name...">
+    <br>
+    <button onclick="getWeather()">🔍 Get Weather</button>
+    <div class="result" id="result"></div>
+    <div class="emoji" id="emoji"></div>
+  </div>
+
+  <script>
+    async function getWeather() {
+      const city = document.getElementById("cityInput").value.trim();
+      if (!city) {
+        document.getElementById("result").innerText = "⚠️ Please enter a city!";
+        return;
+      }
+
+      // 🔑 Replace with your own API key from OpenWeatherMap
+      const apiKey = "PASTE_YOUR_API_KEY_HERE";
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${apiKey}&units=metric`;
+
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data.cod !== 200) {
+          document.getElementById("result").innerText = "❌ City not found!";
+          document.getElementById("emoji").innerText = "";
+          return;
+        }
+
+        const temp = data.main.temp;
+        const feelsLike = data.main.feels_like;
+        const humidity = data.main.humidity;
+        const wind = data.wind.speed;
+        const condition = data.weather[0].main;
+        const description = data.weather[0].description;
+        const country = data.sys.country;
+
+        document.getElementById("result").innerText =
+          `🌍 City: ${data.name}, ${country}
+🌡️ Temperature: ${temp}°C (Feels like ${feelsLike}°C)
+☁️ Condition: ${condition} (${description})
+💧 Humidity: ${humidity}%
+🌬️ Wind Speed: ${wind} m/s`;
+
+        // Emoji based on condition
+        let emoji = "🌤️";
+        if (condition.toLowerCase().includes("cloud")) emoji = "☁️";
+        else if (condition.toLowerCase().includes("rain")) emoji = "🌧️";
+        else if (condition.toLowerCase().includes("clear")) emoji = "☀️";
+        else if (condition.toLowerCase().includes("snow")) emoji = "❄️";
+
+        document.getElementById("emoji").innerText = emoji;
+
+      } catch (error) {
+        document.getElementById("result").innerText = "⚠️ Error fetching data!";
+      }
+    }
+  </script>
+
+</body>
+</html>

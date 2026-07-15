@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopHub App</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #ffe6e6, #e6f7ff);
+      min-height: 2000px;
+    }
+
+    /* Navigation bar */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #222;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: center;
+      transition: background 0.3s ease;
+      z-index: 1000;
+    }
+
+    nav.scrolled {
+      background: linear-gradient(90deg, #ff6f61, #ffcc00, #33cc33);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-size: 18px;
+      transition: color 0.3s ease, background 0.3s ease;
+      padding: 8px 14px;
+      border-radius: 6px;
+    }
+
+    nav ul li a:hover {
+      background: #fff;
+      color: #222;
+    }
+
+    /* Hero section */
+    .hero {
+      padding-top: 120px;
+      text-align: center;
+      background: #fff3e6;
+      padding-bottom: 80px;
+      border-bottom: 5px solid #ffcc00;
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      color: #333;
+    }
+
+    .hero p {
+      font-size: 20px;
+      margin-top: 10px;
+      color: #555;
+    }
+
+    /* Section styling */
+    section {
+      margin: 100px auto;
+      text-align: center;
+      max-width: 900px;
+      padding: 40px;
+      border-radius: 12px;
+      background: #ffffffcc;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    section h2 {
+      font-size: 32px;
+      margin-bottom: 15px;
+      color: #444;
+    }
+
+    section p {
+      font-size: 18px;
+      color: #666;
+    }
+
+    /* Fun emoji stickers */
+    .stickers {
+      font-size: 40px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Menu -->
+  <nav id="navbar">
+    <ul>
+      <li><a href="#home">🏠 Home</a></li>
+      <li><a href="#shop">🛍️ Shop</a></li>
+      <li><a href="#offers">🎁 Offers</a></li>
+      <li><a href="#contact">📞 Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="hero" id="home">
+    <h1>✨ Welcome to ShopHub ✨</h1>
+    <p>Your one-stop shop for everything you love 🛒</p>
+    <div class="stickers">💎 👟 📱 🎨 🍔</div>
+  </div>
+
+  <!-- Shop Section -->
+  <section id="shop">
+    <h2>🛍️ Explore Our Products</h2>
+    <p>From fashion 👗 to gadgets 📱, we’ve got it all!</p>
+    <div class="stickers">👕 👠 🎧 📚 🕹️</div>
+  </section>
+
+  <!-- Offers Section -->
+  <section id="offers">
+    <h2>🎁 Special Offers</h2>
+    <p>Grab amazing deals 💸 and discounts 🔥 every day.</p>
+    <div class="stickers">💰 🎉 🏷️ 🛒 🎊</div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>📞 Get in Touch</h2>
+    <p>We’re here to help 🤝. Reach out anytime!</p>
+    <div class="stickers">📧 📲 💬 🤗</div>
+  </section>
+
+  <script>
+    // JavaScript to change navbar color on scroll
+    const navbar = document.getElementById("navbar");
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add("scrolled");
+      } else {
+        navbar.classList.remove("scrolled");
+      }
+    });
+  </script>
+
+</body>
+</html>
